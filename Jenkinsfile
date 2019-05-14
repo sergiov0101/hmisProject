@@ -1,6 +1,6 @@
 node{
     stage('checkout'){
-            git 'https://github.com/sergiov0101/hmisProject' 
+            checkout scm
     }
     stage('prueba'){
         sh 'echo "hello world"'
