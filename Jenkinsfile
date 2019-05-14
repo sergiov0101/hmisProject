@@ -8,7 +8,7 @@ node{
     stage('git hook prueba'){
         sh 'echo "funciona el hook"'
     }
-    stage('contruccion'){
+    stage('contruccion del proyecto'){
         sh 'docker-compose build'
     }
 }
