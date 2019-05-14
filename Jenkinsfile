@@ -9,9 +9,9 @@ node{
         sh 'echo "funciona el hook"'
     }
     stage('contruccion'){
-        sh 'docker-compose build'
+        sh 'sudo docker-compose build'
     }
     stage('Levantamos'){
-        sh 'docker-compose up'
+        sh 'sudo docker-compose up'
     }
 }
