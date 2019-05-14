@@ -11,7 +11,4 @@ node{
     stage('contruccion'){
         sh 'docker-compose build'
     }
-    stage('Levantamos'){
-        sh 'docker-compose up'
-    }
 }
