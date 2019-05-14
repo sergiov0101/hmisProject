@@ -5,7 +5,7 @@ node{
     stage('prueba'){
         sh 'echo "hello world"'
     }
-    stage('git hook prueba 2'){
+    stage('git hook prueba'){
         sh 'echo "funciona el hook"'
     }
     stage('contruccion'){
