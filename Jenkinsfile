@@ -1,6 +1,6 @@
 node{
     stage('checkout'){
-            git 'https://github.com/antonioofdz/hmisProject.git' 
+            git 'https://github.com/sergiov0101/hmisProject' 
     }
     stage('prueba'){
         sh 'echo "hello world"'
