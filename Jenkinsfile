@@ -9,7 +9,7 @@ node{
         sh 'echo "funciona el hook"'
     }
     stage('contruccion'){
-        sh 'docker-compose -f docker-compose.yml build'
+        sh 'docker-compose build'
     }
     stage('Levantamos'){
         sh 'docker-compose -f docker-compose.yml up --force-recreate --abort-on-container-exit"'
