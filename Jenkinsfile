@@ -12,6 +12,6 @@ node{
         sh 'docker-compose build'
     }
     stage('Levantamos'){
-        sh 'docker-compose -f docker-compose.yml up --force-recreate --abort-on-container-exit"'
+        sh 'docker-compose up'
     }
 }
