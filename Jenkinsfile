@@ -4,11 +4,19 @@ node{
     }
     stage('Elimino contenedores antiguos'){
         try{
+            sh 'docker stop $(docker ps -a -q)'
+            echo 'Detenidos contenedores'
+        }
+        catch(Exception e){
+            echo 'No hay contenedores que detener'
+        }
+
+        try{
             sh 'docker rm $(docker ps -a -q)'
             echo 'Eliminados contenedores'
         }
         catch(Exception e){
-            echo 'no hay contenedores que eliminar'
+           echo 'No hay contenedores que eliminar'
         }
     }
     stage('Contruccion del proyecto'){
