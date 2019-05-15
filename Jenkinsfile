@@ -8,7 +8,11 @@ node{
     stage('git hook'){
         sh 'echo "funciona el hook8"'
     }
-    stage('contruccion del proyecto'){
+    stage('Contruccion del proyecto'){
         sh 'docker-compose build'
     }
+        stage('Levanto contenedores'){
+        sh 'docker-compose up -d'
+    }
+
 }
