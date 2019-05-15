@@ -1,17 +1,14 @@
 node{
-    stage('checkout'){
+    stage('checkout del repositorio git'){
             checkout scm
     }
-    stage('prueba'){
-        sh 'echo "hello world"'
-    }
-    stage('git hook'){
-        sh 'echo "funciona el hook8"'
+    stage('Elimino contenedores antiguos'){
+        sh 'docker rm $(docker ps -a -q)'
     }
     stage('Contruccion del proyecto'){
         sh 'docker-compose build'
     }
-        stage('Levanto contenedores'){
+        stage('Levantar contenedores'){
         sh 'docker-compose up -d'
     }
 
