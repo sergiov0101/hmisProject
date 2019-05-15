@@ -6,7 +6,7 @@ node{
         try{
             sh 'docker rm $(docker ps -a -q)'
         }
-        catch(e){
+        catch(1){
             echo 'No hay contenedores que eliminar'
             throw
         }
