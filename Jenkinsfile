@@ -6,8 +6,8 @@ node{
         try{
             sh 'docker rm $(docker ps -a -q)'
         }
-        catch{
-            echo 'No hay contenedores que eliminar'
+        catch(Exception e){
+           
         }
     }
     stage('Contruccion del proyecto'){
