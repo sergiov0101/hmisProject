@@ -3,7 +3,13 @@ node{
             checkout scm
     }
     stage('Elimino contenedores antiguos'){
-        sh 'docker rm $(docker ps -a -q)'
+        try{
+            sh 'docker rm $(docker ps -a -q)'
+        }
+        catch(exc){
+            echo 'No hay contenedores que eliminar'
+            throw
+        }
     }
     stage('Contruccion del proyecto'){
         sh 'docker-compose build'
