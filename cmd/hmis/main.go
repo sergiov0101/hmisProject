@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/antonioofdz/hmisProject/pkg/handlers"
+	"github.com/antonioofdz/hmisProject/pkg/routes"
 )
 
 func main() {
-	handlers.LoadRoutes()
+	routes.LoadRoutes()
 }
