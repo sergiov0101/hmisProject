@@ -6,6 +6,7 @@ WORKDIR /app
 
 COPY . .
 
+RUN go test ./...
 RUN go mod download && \
     go install ./cmd/hmis
 
