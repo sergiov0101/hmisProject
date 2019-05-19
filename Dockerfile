@@ -22,9 +22,7 @@ RUN go mod download && \
 # (primer parametro el puerto a exponer fuera del contenedor y el segundo parametro el puerto en el que está expuesta en el contenedor)
 EXPOSE 5002:5002
 
-# Ahora, como antes hemos hecho go install ./cmd/hmis para general un ejecutable de la aplicacion,
-# ahora lo ejecutamos.
-# Y ya estaría la aplicación ejecutandose
+# Ahora, ejecutamos el compilado que hemos generado anteriormente con el comando go install ./cmd/hmis
 CMD ["hmis"]
 
 # Nota1: Los comandos que se ejecuten con RUN lo haran en tiempo de compilación
