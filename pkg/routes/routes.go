@@ -16,6 +16,7 @@ func LoadRoutes() {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/login", loginUserController).Methods("POST")
+	router.HandleFunc("/signin", signInController).Methods("POST")
 	router.Handle("/user", handlers.CheckToken(http.HandlerFunc(getUserByTokenController))).Methods("GET")
 
 	log.Fatal(http.ListenAndServe(":5002", router))
@@ -46,4 +47,20 @@ func getUserByTokenController(w http.ResponseWriter, req *http.Request) {
 	}
 
 	json.NewEncoder(w).Encode(data)
+}
+
+// Controlador para dar de alta a un nuevo usuario
+func signInController(w http.ResponseWriter, req *http.Request) {
+	var signInUserDB *models.SignInUserDB
+	if err := json.NewDecoder(req.Body).Decode(&signInUserDB); err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		w.Write([]byte("Error Parsing BODY! [/signin]"))
+	}
+
+	err := handlers.SignInUser(signInUserDB)
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		w.Write([]byte("Something bad happened! [/signin] \n" + err.Error()))
+	}
+	json.NewEncoder(w).Encode(http.StatusOK)
 }
