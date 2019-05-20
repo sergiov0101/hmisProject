@@ -15,7 +15,7 @@ import (
 func LoadRoutes() {
 	router := mux.NewRouter()
 
-	router.HandleFunc("/login", loginUserController).Methods("POST")
+	router.HandleFunc("/login", loginUserController).Methods("POST", "OPTIONS")
 	router.HandleFunc("/signin", signInController).Methods("POST")
 	router.Handle("/user", handlers.CheckToken(http.HandlerFunc(getUserByTokenController))).Methods("GET")
 
@@ -24,7 +24,7 @@ func LoadRoutes() {
 
 // Controlador para logear a un usuario
 func loginUserController(w http.ResponseWriter, req *http.Request) {
-	enableCors(&w)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	var userDB *models.UserDBCredentials
 	if err := json.NewDecoder(req.Body).Decode(&userDB); err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
@@ -41,7 +41,6 @@ func loginUserController(w http.ResponseWriter, req *http.Request) {
 
 // Controlador que obtiene un usuario por su Token
 func getUserByTokenController(w http.ResponseWriter, req *http.Request) {
-	enableCors(&w)
 	data, err := handlers.GetUserUserByToken(req.Header.Get("token"))
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -53,7 +52,6 @@ func getUserByTokenController(w http.ResponseWriter, req *http.Request) {
 
 // Controlador para dar de alta a un nuevo usuario
 func signInController(w http.ResponseWriter, req *http.Request) {
-	enableCors(&w)
 	var signInUserDB *models.SignInUserDB
 	if err := json.NewDecoder(req.Body).Decode(&signInUserDB); err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
@@ -66,10 +64,4 @@ func signInController(w http.ResponseWriter, req *http.Request) {
 		w.Write([]byte("Something bad happened! [/signin] \n" + err.Error()))
 	}
 	json.NewEncoder(w).Encode(http.StatusOK)
-}
-
-func enableCors(w *http.ResponseWriter) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-	(*w).Header().Set("Access-Control-Allow-Methods", "POST,GET,OPTIONS, PUT, DELETE")
-	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 }
