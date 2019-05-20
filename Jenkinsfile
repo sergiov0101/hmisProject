@@ -1,9 +1,11 @@
 node{
     stage('checkout del repositorio git'){
+            //Checkout del repositorio configurado 
             checkout scm
     }
-    stage('Elimino contenedores antiguos'){
+    stage('Eliminar contenedores antiguos'){
         try{
+            //Se detienen los contenedores que esten en ejecucion
             sh 'docker stop $(docker ps -a -q)'
             echo 'Detenidos contenedores'
         }
@@ -12,6 +14,7 @@ node{
         }
 
         try{
+            //Se eliminan los contenedores que existan
             sh 'docker rm $(docker ps -a -q)'
             echo 'Eliminados contenedores'
         }
@@ -20,9 +23,11 @@ node{
         }
     }
     stage('Contruccion del proyecto'){
+        //Se contruye el proyecto docker
         sh 'docker-compose build'
     }
         stage('Levantar contenedores'){
+        //Se levantan los contenedores
         sh 'docker-compose up -d'
     }
 
