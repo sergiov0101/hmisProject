@@ -25,6 +25,7 @@ func LoadRoutes() {
 // Controlador para logear a un usuario
 func loginUserController(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	var userDB *models.UserDBCredentials
 	if err := json.NewDecoder(req.Body).Decode(&userDB); err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
