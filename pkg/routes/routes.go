@@ -24,6 +24,7 @@ func LoadRoutes() {
 
 // Controlador para logear a un usuario
 func loginUserController(w http.ResponseWriter, req *http.Request) {
+	enableCors(&w)
 	var userDB *models.UserDBCredentials
 	if err := json.NewDecoder(req.Body).Decode(&userDB); err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
@@ -40,6 +41,7 @@ func loginUserController(w http.ResponseWriter, req *http.Request) {
 
 // Controlador que obtiene un usuario por su Token
 func getUserByTokenController(w http.ResponseWriter, req *http.Request) {
+	enableCors(&w)
 	data, err := handlers.GetUserUserByToken(req.Header.Get("token"))
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -51,6 +53,7 @@ func getUserByTokenController(w http.ResponseWriter, req *http.Request) {
 
 // Controlador para dar de alta a un nuevo usuario
 func signInController(w http.ResponseWriter, req *http.Request) {
+	enableCors(&w)
 	var signInUserDB *models.SignInUserDB
 	if err := json.NewDecoder(req.Body).Decode(&signInUserDB); err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
@@ -63,4 +66,8 @@ func signInController(w http.ResponseWriter, req *http.Request) {
 		w.Write([]byte("Something bad happened! [/signin] \n" + err.Error()))
 	}
 	json.NewEncoder(w).Encode(http.StatusOK)
+}
+
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }
