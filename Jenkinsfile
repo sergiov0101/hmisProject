@@ -22,7 +22,7 @@ node{
            echo 'No hay contenedores que eliminar'
         }
     }
-    stage('Contruccion del proyecto'){
+    stage('Contruccion del proyecto '){
         //Se contruye el proyecto docker
         sh 'docker-compose build'
     }
