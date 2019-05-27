@@ -7,6 +7,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 
 	"github.com/antonioofdz/hmisProject/pkg/handlers"
 	"github.com/antonioofdz/hmisProject/pkg/models"
@@ -19,25 +20,40 @@ func LoadRoutes() {
 	router.HandleFunc("/signin", signInController).Methods("POST")
 	router.Handle("/user", handlers.CheckToken(http.HandlerFunc(getUserByTokenController))).Methods("GET")
 
-	log.Fatal(http.ListenAndServe(":5002", router))
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},           // All origins
+		AllowedMethods: []string{"GET", "POST"}, // Allowing only get, just an example
+	})
+
+	log.Fatal(http.ListenAndServe(":5002", c.Handler(router)))
 }
 
 // Controlador para logear a un usuario
 func loginUserController(w http.ResponseWriter, req *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Content-Type", "application/json")
+	(w).Header().Set("Access-Control-Allow-Origin", "*")
+	(w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	(w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+
 	var userDB *models.UserDBCredentials
 	if err := json.NewDecoder(req.Body).Decode(&userDB); err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte("Error Parsing BODY! [/user/login]"))
 	}
 
-	data, err := handlers.GetUserCredentials(userDB)
+	token, err := handlers.GetUserCredentials(userDB)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte("Something bad happened! [/user/login]"))
 	}
-	json.NewEncoder(w).Encode(data)
+
+	dataResult, err := handlers.GetUserUserByToken(token.Token)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Something bad happened! [/user]"))
+	}
+
+	json.NewEncoder(w).Encode(dataResult)
 }
 
 // Controlador que obtiene un usuario por su Token
