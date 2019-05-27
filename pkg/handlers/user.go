@@ -11,6 +11,22 @@ import (
 	"github.com/antonioofdz/hmisProject/pkg/database"
 )
 
+func UpdateUser(user *models.User) error {
+	sql := `UPDATE USERS set email=?, name=?, surname=? where id=?`
+	db, err := database.Open()
+	if err != nil {
+		return errors.New("error opening the database")
+	}
+	defer db.Close()
+
+	err = db.QueryRow(sql, &user.Name, &user.Email, &user.Surname).Scan()
+	if err != nil {
+		return errors.New("error executing query")
+	}
+
+	return nil
+}
+
 func GetUserCredentials(userCredentials *models.UserDBCredentials) (*models.UserDBToken, error) {
 	sqlGetUserCredentials := `SELECT users.token 
 							FROM users 
@@ -31,7 +47,7 @@ func GetUserCredentials(userCredentials *models.UserDBCredentials) (*models.User
 	return &userDB, nil
 }
 
-func GetUserUserById(id int) (*models.UserDB, error) {
+func GetUserUserById(id int64) (*models.UserDB, error) {
 	sqlGetUserCredentials := `SELECT users.id, users.name, 
 									 users.surname, users.email, users.token 
 								FROM users WHERE id=?`
@@ -48,6 +64,35 @@ func GetUserUserById(id int) (*models.UserDB, error) {
 	}
 
 	return &userDB, nil
+}
+
+func GetUsers() ([]models.User, error) {
+	sql := `SELECT users.id, users.name, 
+									 users.surname, users.email`
+
+	db, err := database.Open()
+	if err != nil {
+		return nil, err
+	}
+	defer db.Close()
+
+	var users []models.User
+	rows, err := db.Query(sql)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var b models.User
+		//if err := rows.Scan(&b.Id, &b.Model, &b.Address, &b.Lat, &b.Lon, &b.Booked, &b.DateRent, &b.DateReturn); err != nil {
+		if err := rows.Scan(&b.Id, &b.Name, &b.Surname, &b.Email); err != nil {
+			continue
+		}
+		users = append(users, b)
+	}
+
+	return users, nil
 }
 
 func GetUserUserByToken(token string) (*models.UserDB, error) {
