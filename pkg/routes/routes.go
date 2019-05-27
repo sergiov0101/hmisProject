@@ -2,8 +2,10 @@ package routes
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
@@ -16,16 +18,70 @@ import (
 func LoadRoutes() {
 	router := mux.NewRouter()
 
-	router.HandleFunc("/login", loginUserController).Methods("POST", "OPTIONS")
-	router.HandleFunc("/signin", signInController).Methods("POST")
-	router.Handle("/user", handlers.CheckToken(http.HandlerFunc(getUserByTokenController))).Methods("GET")
+	router.HandleFunc("/login", loginUserController).Methods("POST")
+	router.HandleFunc("/user", signInController).Methods("PUT")
+	router.HandleFunc("/user", updateUserController).Methods("POST")
+	router.HandleFunc("/user/{id}", getUserController).Methods("GET")
+	router.HandleFunc("/user", getUserController).Methods("GET")
+	router.HandleFunc("/user", getUserController).Methods("DELETE")
 
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"*"},           // All origins
-		AllowedMethods: []string{"GET", "POST"}, // Allowing only get, just an example
+		AllowedOrigins: []string{"*"},
+		AllowedMethods: []string{"GET", "POST"},
 	})
 
 	log.Fatal(http.ListenAndServe(":5002", c.Handler(router)))
+}
+
+func getUserController(w http.ResponseWriter, req *http.Request) {
+	(w).Header().Set("Access-Control-Allow-Origin", "*")
+	(w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	(w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+	w.Header().Set("Content-Type", "application/json")
+
+	params := mux.Vars(req)
+	idHeader := params["id"]
+	fmt.Println("IDHEADER" + idHeader)
+	if idHeader == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("CANT FIND ID PARAMETER IN QUERY"))
+	}
+
+	id, err := strconv.ParseInt(idHeader, 10, 64)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("ID PARAMTER WITH BAD FORMAT"))
+	}
+
+	data, err := handlers.GetUserUserById(id)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Something bad happened! [/user]"))
+	}
+
+	json.NewEncoder(w).Encode(data)
+}
+
+func updateUserController(w http.ResponseWriter, req *http.Request) {
+	(w).Header().Set("Access-Control-Allow-Origin", "*")
+	(w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	(w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+	w.Header().Set("Content-Type", "application/json")
+
+	var userDB *models.User
+
+	if err := json.NewDecoder(req.Body).Decode(&userDB); err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		w.Write([]byte("Error Parsing BODY! [/user/login]"))
+	}
+
+	dataResult, err := handlers.UpdateUser(userD)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Something bad happened! [/user]"))
+	}
+
+	json.NewEncoder(w).Encode(dataResult)
 }
 
 // Controlador para logear a un usuario

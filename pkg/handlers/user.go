@@ -31,6 +31,25 @@ func GetUserCredentials(userCredentials *models.UserDBCredentials) (*models.User
 	return &userDB, nil
 }
 
+func GetUserUserById(id int) (*models.UserDB, error) {
+	sqlGetUserCredentials := `SELECT users.id, users.name, 
+									 users.surname, users.email, users.token 
+								FROM users WHERE id=?`
+	db, err := database.Open()
+	if err != nil {
+		return nil, errors.New("error opening the database")
+	}
+	defer db.Close()
+
+	var userDB models.UserDB
+	err = db.QueryRow(sqlGetUserCredentials, id).Scan(&userDB.Id, &userDB.Name, &userDB.Surname, &userDB.Email, &userDB.Token)
+	if err != nil {
+		return nil, errors.New("error executing query")
+	}
+
+	return &userDB, nil
+}
+
 func GetUserUserByToken(token string) (*models.UserDB, error) {
 	fmt.Println(token)
 	sqlGetUserCredentials := `SELECT users.id, users.name, 
