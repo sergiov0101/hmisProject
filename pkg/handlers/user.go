@@ -12,16 +12,44 @@ import (
 )
 
 func UpdateUser(user *models.User) error {
-	sql := `UPDATE USERS set email=?, name=?, surname=? where id=?`
+	sql := `UPDATE users set email=?, name=?, surname=? where id=?`
 	db, err := database.Open()
 	if err != nil {
 		return errors.New("error opening the database")
 	}
 	defer db.Close()
 
-	err = db.QueryRow(sql, &user.Name, &user.Email, &user.Surname).Scan()
+	dbPrepare, err := db.Prepare(sql)
 	if err != nil {
 		return errors.New("error executing query")
+	}
+
+	_, err = dbPrepare.Exec(&user.Name, &user.Email, &user.Surname, &user.Id)
+	if err != nil {
+		err = errors.New("CANNOT PREPARE STATMENT")
+		return err
+	}
+
+	return nil
+}
+
+func DeleteUser(id int64) error {
+	sql := `delete from users where id=?`
+	db, err := database.Open()
+	if err != nil {
+		return errors.New("error opening the database")
+	}
+	defer db.Close()
+
+	dbPrepare, err := db.Prepare(sql)
+	if err != nil {
+		return errors.New("error executing query")
+	}
+
+	_, err = dbPrepare.Exec(id)
+	if err != nil {
+		err = errors.New("CANNOT PREPARE STATMENT")
+		return err
 	}
 
 	return nil
@@ -68,7 +96,7 @@ func GetUserUserById(id int64) (*models.UserDB, error) {
 
 func GetUsers() ([]models.User, error) {
 	sql := `SELECT users.id, users.name, 
-									 users.surname, users.email`
+									 users.surname, users.email FROM users`
 
 	db, err := database.Open()
 	if err != nil {

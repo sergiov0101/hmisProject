@@ -23,7 +23,7 @@ func LoadRoutes() {
 	router.HandleFunc("/user", updateUserController).Methods("POST")
 	router.HandleFunc("/user/{id}", getUserController).Methods("GET")
 	router.HandleFunc("/user", getUsersController).Methods("GET")
-	//router.HandleFunc("/user", getUserController).Methods("DELETE")
+	router.HandleFunc("/user", deleteUserController).Methods("DELETE")
 
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
@@ -70,6 +70,7 @@ func getUsersController(w http.ResponseWriter, req *http.Request) {
 
 	data, err := handlers.GetUsers()
 	if err != nil {
+		fmt.Print(err)
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte("Something bad happened! [/user]"))
 	}
@@ -90,6 +91,7 @@ func updateUserController(w http.ResponseWriter, req *http.Request) {
 	}
 
 	if err := handlers.UpdateUser(userDB); err != nil {
+		fmt.Println(err)
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte("Something bad happened! [/user]"))
 	}
@@ -143,6 +145,21 @@ func signInController(w http.ResponseWriter, req *http.Request) {
 	}
 
 	err := handlers.SignInUser(signInUserDB)
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		w.Write([]byte("Something bad happened! [/signin] \n" + err.Error()))
+	}
+	json.NewEncoder(w).Encode(http.StatusOK)
+}
+
+func deleteUserController(w http.ResponseWriter, req *http.Request) {
+	var user *models.UserBasic
+	if err := json.NewDecoder(req.Body).Decode(&user); err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		w.Write([]byte("Error Parsing BODY! [/signin]"))
+	}
+
+	err := handlers.DeleteUser(user.Id)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte("Something bad happened! [/signin] \n" + err.Error()))
