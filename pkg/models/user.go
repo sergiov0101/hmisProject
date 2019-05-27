@@ -1,4 +1,3 @@
-
 package models
 
 type UserDBCredentials struct {
@@ -13,6 +12,13 @@ type UserDBToken struct {
 type UserDB struct {
 	UserBasic
 	UserDBToken
+	Name    string
+	Surname string
+	Email   string
+}
+
+type User struct {
+	Id      int64
 	Name    string
 	Surname string
 	Email   string

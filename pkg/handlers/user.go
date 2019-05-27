@@ -11,6 +11,22 @@ import (
 	"github.com/antonioofdz/hmisProject/pkg/database"
 )
 
+func UpdateUser(user *models.UserDB) error {
+	sql := `UPDATE USERS set email=?, name=?, surname=? where id=?`
+	db, err := database.Open()
+	if err != nil {
+		return errors.New("error opening the database")
+	}
+	defer db.Close()
+
+	err = db.QueryRow(sql, &user.Name, &user.Email, &user.Surname).Scan()
+	if err != nil {
+		return errors.New("error executing query")
+	}
+
+	return nil
+}
+
 func GetUserCredentials(userCredentials *models.UserDBCredentials) (*models.UserDBToken, error) {
 	sqlGetUserCredentials := `SELECT users.token 
 							FROM users 
