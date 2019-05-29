@@ -21,9 +21,9 @@ func LoadRoutes() {
 	router.HandleFunc("/login", loginUserController).Methods("POST")
 	router.HandleFunc("/users/add", signInController).Methods("POST")
 	router.HandleFunc("/users", updateUserController).Methods("POST")
+	router.HandleFunc("/users/delete", deleteUserController).Methods("POST")
 	router.HandleFunc("/users/{id}", getUserController).Methods("GET")
 	router.HandleFunc("/users", getUsersController).Methods("GET")
-	router.HandleFunc("/users/delete", deleteUserController).Methods("POST")
 
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
