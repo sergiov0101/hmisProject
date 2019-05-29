@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, NavigationExtras, ActivatedRoute } from '@angular/router';
-import { InsertBikeService, Bike } from '../insert-bike/insert-bike.service';
+import { InsertBikeService, User } from '../insert-bike/insert-bike.service';
 
 @Component({
   selector: 'app-insert-bike',
@@ -9,22 +9,21 @@ import { InsertBikeService, Bike } from '../insert-bike/insert-bike.service';
 })
 export class InsertBikeComponent implements OnInit {
 
-  
   constructor(private router: Router, private route: ActivatedRoute, private insertService : InsertBikeService) {
     this.route.queryParams.subscribe(params => {
       if (params["Bike"] != undefined) {
-        this.bike = JSON.parse(params["Bike"]);
+        this.user = JSON.parse(params["Bike"]);
         this.shouldShowEditButton = true;
       }      
     });
   }
 
   public shouldShowEditButton = false;
-  public bike : Bike;
+  public user : User;
   ngOnInit() {}
 
   addBike() {
-    this.insertService.addBike(this.bike);
+    this.insertService.addBike(this.user);
 
     let navigationExtras: NavigationExtras = {
       queryParams: {
@@ -37,7 +36,7 @@ export class InsertBikeComponent implements OnInit {
   }
 
   editBike() {
-    this.insertService.editBike(this.bike);
+    this.insertService.editBike(this.user);
 
     let navigationExtras: NavigationExtras = {
       queryParams: {

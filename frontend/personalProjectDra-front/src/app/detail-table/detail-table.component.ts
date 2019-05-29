@@ -24,7 +24,7 @@ export class DetailTableComponent implements OnInit {
   public userType;
   public navigationExtras: NavigationExtras;
 
-  displayedColumns = ['ID', 'Name', 'Surname', 'Email'];
+  displayedColumns = ['ID', 'Name', 'Surname', 'Email', 'Actions'];
   public dataSource;
   constructor(private service: DetailTableService, 
               private router: Router, 
@@ -75,7 +75,6 @@ export class DetailTableComponent implements OnInit {
   }
 
 }
-
 
 export class UserDataSource extends DataSource<any> {
   constructor(private service: DetailTableService) {

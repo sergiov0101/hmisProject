@@ -15,7 +15,6 @@ import { BikeDetailService } from './bikedetail/bikedetail.service';
 import { LoginService } from './login/login.service';
 import { RegistrationService } from './registration/registration.service';
 import { MatToolbarModule,  MatTableModule } from '@angular/material';
-import { MainBikesViewComponent } from './main-bikes-view/main-bikes-view.component';
 import { BikedetailComponent } from './bikedetail/bikedetail.component';
 import { HttpClientModule} from '@angular/common/http';
 import { AdminViewComponent } from './admin-view/admin-view.component';
@@ -35,7 +34,6 @@ const googleMapsCore = AgmCoreModule.forRoot({
     UserComponent,
     RegistrationComponent,
     DetailTableComponent,
-    MainBikesViewComponent,
     BikedetailComponent,
     AdminViewComponent,
     InsertBikeComponent

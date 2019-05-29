@@ -127,6 +127,11 @@ func loginUserController(w http.ResponseWriter, req *http.Request) {
 
 // Controlador que obtiene un usuario por su Token
 func getUserByTokenController(w http.ResponseWriter, req *http.Request) {
+	(w).Header().Set("Access-Control-Allow-Origin", "*")
+	(w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	(w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+	w.Header().Set("Content-Type", "application/json")
+
 	data, err := handlers.GetUserUserByToken(req.Header.Get("token"))
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -138,6 +143,11 @@ func getUserByTokenController(w http.ResponseWriter, req *http.Request) {
 
 // Controlador para dar de alta a un nuevo usuario
 func signInController(w http.ResponseWriter, req *http.Request) {
+	(w).Header().Set("Access-Control-Allow-Origin", "*")
+	(w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	(w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+	w.Header().Set("Content-Type", "application/json")
+
 	var signInUserDB *models.SignInUserDB
 	if err := json.NewDecoder(req.Body).Decode(&signInUserDB); err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
@@ -153,6 +163,11 @@ func signInController(w http.ResponseWriter, req *http.Request) {
 }
 
 func deleteUserController(w http.ResponseWriter, req *http.Request) {
+	(w).Header().Set("Access-Control-Allow-Origin", "*")
+	(w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	(w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+	w.Header().Set("Content-Type", "application/json")
+
 	var user *models.UserBasic
 	if err := json.NewDecoder(req.Body).Decode(&user); err != nil {
 		w.WriteHeader(http.StatusUnauthorized)

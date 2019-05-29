@@ -7,32 +7,18 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class BikeDetailService {
 
-    private serviceUrl = 'http://localhost:5002';
+    private serviceUrl = 'http://proyectohmis.eastus.cloudapp.azure.com:5002';
     
     constructor(private http: HttpClient) { }
     
-    getBike(id: number): Observable<Bike> {
-        let o =   this.http.get<Bike>(this.serviceUrl + "/bike/1");
-        return o;
-    }
-
-    bookBike(idBike: number, idUser : number): Observable<any> {
-        let o = this.http.post(this.serviceUrl + "/bikes/book", {IdBike: 1, IdUser : 1});
-        console.log("O ", o)
-        return o;
-    }
-
-    deleteBike(idBike: number): Observable<any> {
-        let o = this.http.post(this.serviceUrl + "/bikes/delete", {IdBike: 1});
-        return o;
+    getBike(id: number): Observable<User> {
+        return this.http.get<User>(this.serviceUrl + "/users/" + id);
     }
 }
 
-export interface Bike {
-    Model : string;
-    Lat: number;
-    Lon: number;
-    Address: number;
-    Booked: boolean;
-    Id: number;
+export interface User {
+   Id: number;
+   Name : string;
+   Surname : string;
+   Email : string;
 }

@@ -3,31 +3,36 @@
 </mat-toolbar>
 <mat-card class="my-card">
   <mat-card-content>
-    <form class="my-form">
+    <form class="my-form" novalidate (ngSubmit)="register()" >
        <mat-form-field class="full-width">
-              <mat-label>First Name</mat-label>
-              <input  matInput  placeholder="First name"  name="fname"  required>
+              <mat-label>Name</mat-label>
+              <input  matInput  placeholder="First name"  name="fname"  required [(ngModel)]="user.Name">
            </mat-form-field>
            <mat-form-field class="full-width">
-              <mat-label>Last Name</mat-label>
-              <input  matInput  placeholder="Last Name" name="lname"  required>
-           </mat-form-field>
-           <mat-form-field class="full-width">
-              <mat-label>Address</mat-label>
-              <input  matInput  placeholder="Address" name="address"  required>
+              <mat-label>Surname</mat-label>
+              <input  matInput  placeholder="Last Name" name="lname"  required [(ngModel)]="user.Surname">
            </mat-form-field>
            <mat-form-field class="full-width">
               <mat-label>Email</mat-label>
-              <input  matInput  placeholder="Email" name="email">
+              <input  matInput  placeholder="Address" name="address"  required [(ngModel)]="user.Email">
            </mat-form-field>
            <mat-form-field class="full-width">
+            <mat-label>UserName</mat-label>
+            <input  matInput  placeholder="Address" name="address"  required [(ngModel)]="user.Username">
+         </mat-form-field>
+           <mat-form-field class="full-width">
               <mat-label>Password</mat-label>
-              <input  matInput  placeholder="Password"  name="password">
+              <input  matInput  placeholder="Email" name="email" required [(ngModel)]="user.Password">
            </mat-form-field>
+           <mat-form-field class="full-width">
+            <mat-label>Repeat password</mat-label>
+            <input  matInput  placeholder="Username" name="Username" required>
+         </mat-form-field>
+          <!-- REGISTER BUTTON -->
+         <button mat-raised-button  type="submit" color="primary">REGISTER</button>
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <!-- REGISTER BUTTON -->
-    <button mat-raised-button (click)="register()" color="primary">REGISTER</button>
+   
   </mat-card-actions>
 </mat-card>

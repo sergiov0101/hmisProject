@@ -25,24 +25,17 @@ export class BikedetailComponent implements OnInit {
             "Email": this.navigationExtras["Email"] == undefined ? '' : this.navigationExtras["Email"],
             "Surname" : this.navigationExtras["Surname"] == undefined ? '' : this.navigationExtras["Surname"],
             "UserType": this.navigationExtras["UserType"] == undefined ? '' : this.navigationExtras["UserType"] ,
-            "Id" : this.navigationExtras["Id"] == undefined ? '' : this.navigationExtras["Id"],
-            "IdBike" : this.navigationExtras["IdBike"] == undefined ? '' : this.navigationExtras["IdBike"]
+            "Id" : this.navigationExtras["Id"] == undefined ? '' : this.navigationExtras["Id"]
         }
       };
-
-      if (params["UserType"] == "admin") {
-        this.isAdminView = false;
-      } else {
-        this.isAdminView = true;
-      }
 
     });
 
     bikeServiceIn.getBike(this.id).subscribe(data => {
       this.bike = {
-        Model: data.Model != undefined ? data.Model : '',
-        Lat : data.Lat != undefined ? data.Lat : 0,
-        Lon : data.Lon != undefined ? data.Lon : 0,
+        Name: data.Name != undefined ? data.Name : '',
+        Surname : data.Surname != undefined ? data.Surname : 0,
+        Email : data.Email != undefined ? data.Email : 0,
         Id : data.Id != undefined ? data.Id : 0
       };
     }); 
@@ -54,15 +47,4 @@ export class BikedetailComponent implements OnInit {
     return this.isAdminView;
   }
 
-  bookBike(id : number){
-    this.bikeService.bookBike(1, 1).subscribe(data => {
-      // TODO: IMPLEMENTAR
-    })
-  }
-
-  deleteBike(id : number){
-    this.bikeService.deleteBike(1).subscribe(data => {
-      // TODO: IMPLEMENTAR
-    })
-  }
 }

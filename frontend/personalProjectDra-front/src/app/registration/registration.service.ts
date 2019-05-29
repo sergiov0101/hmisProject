@@ -5,18 +5,18 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class RegistrationService {
-    private serviceUrl = 'http://localhost:5002';
+    private serviceUrl = 'http://proyectohmis.eastus.cloudapp.azure.com:5002';
     
     constructor(private http: HttpClient) { }
     
-    login(userLogin : SignIn): Observable<SignIn> {
-        let o =  this.http.post<SignIn>(this.serviceUrl + "/signin", userLogin);
+    createUser(userLogin : SignIn): Observable<SignIn> {
+        let o =  this.http.post<SignIn>(this.serviceUrl + "/users/add", userLogin);
         return o;
     }
 }
 
 export interface SignIn {
-   UserName : string,
+   Username : string,
    Password : string,
    Name : string,
    Surname : string,

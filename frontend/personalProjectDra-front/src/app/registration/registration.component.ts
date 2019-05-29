@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, NavigationExtras} from '@angular/router';
-import {SignIn} from './registration.service';
+import {SignIn, RegistrationService} from './registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -9,21 +9,35 @@ import {SignIn} from './registration.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(private router : Router) { }
+  constructor(private router : Router, private service : RegistrationService) { }
 
   ngOnInit() {
   }
 
-  private signInModel : SignIn;
+  public user : SignIn = {
+    Name: '',
+    Surname : "",
+    Email :"",
+    Username : "",
+    Password : ""
+  };
+
   private navigationExtras: NavigationExtras = {
     queryParams: {
-        "SignIn": this.signInModel
+        "User": this.user
     }
   };
 
-  signIn() : void {
+  register() : void {
        //peticion de signin, en caso satisfactorio, pasamos a la vista de login 
-       this.router.navigate(["login"], this.navigationExtras);
+
+       console.log("THIS USER : ", this.user)
+       this.service.createUser(this.user).subscribe(data => {
+         console.log("DATA L ", data);
+       });
+      // this.router.navigate(["login"], this.navigationExtras);
   }
 
 }
+
+
