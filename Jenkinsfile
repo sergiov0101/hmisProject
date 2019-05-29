@@ -37,7 +37,7 @@ node{
         
     }
 
-        stage('Contruccion del frontEnd (login Angular) '){
+        stage('Contruccion del frontEnd (login Angular)'){
         //Se contruye el proyecto docker
         dir('frontend/personalProjectDra-front') {
             sh 'docker-compose build'
