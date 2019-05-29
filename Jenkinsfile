@@ -24,11 +24,17 @@ node{
     }
     stage('Contruccion del proyecto '){
         //Se contruye el proyecto docker
-        sh 'docker-compose build'
+        dir('BACKEND') {
+            sh 'docker-compose build'
+        }
+        
     }
         stage('Levantar contenedores'){
         //Se levantan los contenedores
-        sh 'docker-compose up -d'
+        dir('BACKEND'){
+            sh 'docker-compose up -d'
+        }
+        
     }
 
 }
