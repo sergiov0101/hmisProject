@@ -22,7 +22,7 @@ node{
            echo 'No hay contenedores que eliminar'
         }
     }
-    stage('Contruccion del proyecto '){
+    stage('Contruccion de la api '){
         //Se contruye el proyecto docker
         dir('BACKEND') {
             sh 'docker-compose build'
@@ -32,6 +32,21 @@ node{
         stage('Levantar contenedores'){
         //Se levantan los contenedores
         dir('BACKEND'){
+            sh 'docker-compose up -d'
+        }
+        
+    }
+
+        stage('Contruccion del frontEnd (login Angular) '){
+        //Se contruye el proyecto docker
+        dir('frontend/personalProjectDra-front') {
+            sh 'docker-compose build'
+        }
+        
+    }
+        stage('Levantar contenedores FronEnd'){
+        //Se levantan los contenedores
+        dir('frontend/personalProjectDra-front'){
             sh 'docker-compose up -d'
         }
         
