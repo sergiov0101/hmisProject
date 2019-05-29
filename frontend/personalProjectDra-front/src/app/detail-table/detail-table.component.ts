@@ -24,10 +24,9 @@ export class DetailTableComponent implements OnInit {
   public userType;
   public navigationExtras: NavigationExtras;
 
-  //dataSource = new BikeDataSource(this.bikeService);
   displayedColumns = ['ID', 'Name', 'Surname', 'Email'];
   public dataSource;
-  constructor(private bikeService: DetailTableService, 
+  constructor(private service: DetailTableService, 
               private router: Router, 
               private route : ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
@@ -38,7 +37,7 @@ export class DetailTableComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.dataSource = new BikeDataSource(this.bikeService);
+    this.dataSource = new UserDataSource(this.service);
   }
 
   bikeDetail(id : number) : void {
@@ -58,7 +57,7 @@ export class DetailTableComponent implements OnInit {
   }
 
   deleteBike(id : number) : void {
-    this.bikeService.deleteBike(id);
+    this.service.deleteBike(id);
     setTimeout(() => {
       window.location.reload();
     }, 500);
@@ -75,17 +74,16 @@ export class DetailTableComponent implements OnInit {
     this.router.navigate(["insertBike"], navigationExtras);
   }
 
-
 }
 
 
-export class BikeDataSource extends DataSource<any> {
-  constructor(private bikeService: DetailTableService) {
+export class UserDataSource extends DataSource<any> {
+  constructor(private service: DetailTableService) {
     super();
   }
 
-  connect(): Observable<Bike[]> {
-    return this.bikeService.getBikes();
+  connect(): Observable<User[]> {
+    return this.service.getBikes();
   }
 
   disconnect() {}

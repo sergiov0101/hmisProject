@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DetailTableService {
 
-    private serviceUrl = 'http://localhost:5002';
+    private serviceUrl = 'http://proyectohmis.eastus.cloudapp.azure.com:5002';
     
     constructor(private http: HttpClient) { }
     
@@ -15,13 +15,12 @@ export class DetailTableService {
     }
     
     deleteBike(id : number) : void {
-        this.http.post(this.serviceUrl + "/bikes/delete", {
+        this.http.post(this.serviceUrl + "/users/delete", {
             "Id": id
         }).subscribe(response => {
             console.log("RESPONSE : ", response);
         });
     }
-
 }
 
 export interface User {

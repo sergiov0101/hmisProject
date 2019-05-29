@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { GgmapsComponent } from './ggmaps/ggmaps.component';
 import { AgmCoreModule } from '@agm/core';
 import { DetailTableComponent } from './detail-table/detail-table.component';
 import { DetailTableService } from './detail-table/detail-table.service';
@@ -35,7 +34,6 @@ const googleMapsCore = AgmCoreModule.forRoot({
     LoginComponent,
     UserComponent,
     RegistrationComponent,
-    GgmapsComponent,
     DetailTableComponent,
     MainBikesViewComponent,
     BikedetailComponent,

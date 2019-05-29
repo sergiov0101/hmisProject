@@ -18,10 +18,10 @@ services:
     - "5001:80"
     restart: on-failure
 
- # app:
-  #  build:
-   #   context: .
-    #  dockerfile: Dockerfile    
-   # ports:
-    #- "5002:5002"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile    
+    ports:
+    - "5002:5002"
     

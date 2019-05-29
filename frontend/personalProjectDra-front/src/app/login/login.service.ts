@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class LoginService {
-    private serviceUrl = 'http://localhost:5002';
+    private serviceUrl ='http://proyectohmis.eastus.cloudapp.azure.com:5002';
     
     constructor(private http: HttpClient) { }
     

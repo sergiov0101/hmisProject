@@ -1,5 +1,0 @@
-<agm-map [latitude]="lat" [longitude]="lng">
-   <agm-marker *ngFor="let bike of bikes" [latitude]="bike.Lat" [longitude]="bike.Lon">
-      <agm-info-window >Disponibilidad: {{bike.Booked ? 'Disponible' : 'Alquilada'}} {{hola}}</agm-info-window>
-   </agm-marker>
- </agm-map>
