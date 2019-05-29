@@ -2,11 +2,12 @@ node{
     stage('checkout del repositorio git'){
             //Checkout del repositorio configurado 
             checkout scm
-             sh 'cd BACKEND'
     }
     stage('Eliminar contenedores antiguos'){
         try{
             //Se detienen los contenedores que esten en ejecucion
+            sh 'cd BACKEND'
+            sh 'ls'
             sh 'docker stop $(docker ps -a -q)'
             echo 'Detenidos contenedores'
         }
