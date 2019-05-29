@@ -5,12 +5,19 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class RegistrationService {
-    private serviceUrl = 'http://proyectohmis.eastus.cloudapp.azure.com:5002';
+    private serviceUrl = 'http://proyectohmis.eastus.cloudapp.azure.com:5002/users/add';
     
     constructor(private http: HttpClient) { }
     
     createUser(userLogin : SignIn): Observable<SignIn> {
-        let o =  this.http.post<SignIn>(this.serviceUrl + "/users/add", userLogin);
+        console.log("USERLOGIN : ", userLogin)
+        let o =  this.http.post<SignIn>(this.serviceUrl, {
+            "Username" : userLogin.Username,
+            "Password" : userLogin.Password,
+            "Name" : userLogin.Name,
+            "Surname" : userLogin.Surname,
+            "Email" : userLogin.Email
+            });
         return o;
     }
 }

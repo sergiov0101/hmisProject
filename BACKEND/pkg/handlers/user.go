@@ -48,7 +48,7 @@ func DeleteUser(id int64) error {
 
 	_, err = dbPrepare.Exec(id)
 	if err != nil {
-		err = errors.New("CANNOT PREPARE STATMENT")
+		err = errors.New(err.Error())
 		return err
 	}
 

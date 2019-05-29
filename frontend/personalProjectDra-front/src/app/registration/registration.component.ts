@@ -29,9 +29,6 @@ export class RegistrationComponent implements OnInit {
   };
 
   register() : void {
-       //peticion de signin, en caso satisfactorio, pasamos a la vista de login 
-
-       console.log("THIS USER : ", this.user)
        this.service.createUser(this.user).subscribe(data => {
          console.log("DATA L ", data);
        });

@@ -23,9 +23,9 @@ export class DetailTableComponent implements OnInit {
   public id;
   public userType;
   public navigationExtras: NavigationExtras;
+  dataSource = new UserDataSource(this.service);
 
   displayedColumns = ['ID', 'Name', 'Surname', 'Email', 'Actions'];
-  public dataSource;
   constructor(private service: DetailTableService, 
               private router: Router, 
               private route : ActivatedRoute) {
@@ -37,7 +37,7 @@ export class DetailTableComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.dataSource = new UserDataSource(this.service);
+    
   }
 
   bikeDetail(id : number) : void {
