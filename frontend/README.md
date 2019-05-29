@@ -1,122 +1,27 @@
-# HMIS EXPO
-----
-**Login User**
-----
-  Realiza el login y, en caso de ser satisfactorio, retorna el accessToken del usuario.
+# PersonalProjectDraFront
 
-* **URL**
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
 
-  /login
+## Development server
 
-* **Method:**
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-  `POST`
-  
-* **Data Body**
+## Code scaffolding
 
-  Se pasará por el cuerpo de la petición un objeto del tipo:
-  ```javascript
-    {
-        "Username" : "example_user",
-        "Password" : "example_password"
-    }
-  ```
-* **Success Response:**
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-  * **Code:** 200 <br />
-    **Content:** `{"Token":"a01bb83c-7f5g-5321-93e9-0242ac120003"}`
- 
-* **Error Response:**
+## Build
 
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "User doesn't exist" }`
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-  OR
+## Running unit tests
 
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ error : "You are unauthorized to make this request." }`
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-----
-**Register User**
-----
-  Realiza el proceso de registro del usuario. ¿DEVUELVE LOS DATOS DEL PROPIO USER?
+## Running end-to-end tests
 
-* **URL**
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-  /signin
+## Further help
 
-* **Method:**
-
-  `POST`
-  
-* **Data Body**
-
-  Se pasará por el cuerpo de la petición un objeto del tipo:
-  ```javascript
-    {
-        "Username" : "example_user",
-        "Password" : "example_password",
-        "Name" : "example_name",
-        "Surname" : "example_surname",
-        "Email" : "example_email"
-    }
-  ```
-
-    La contraseña deberá cumplir las siguientes condiciones:
-    - Minimo 8 caracteres
-	- Al menos una letra mayúscula
-	- Al menos una letra minucula
-	- Al menos un dígito
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
- 
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "Username Already exists" }`
-
-  OR
-
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ error : "You are unauthorized to make this request." }`
-
-----
-**GET User**
-----
-  Obtiene los datos básicos de un usuario.
-
-* **URL**
-
-  /user
-
-* **Method:**
-
-  `GET`
-* **Data header:**
-    **Content:** `{"Token":"a01bb83c-7f5g-5321-93e9-0242ac120003"}`
-  
-* **Success Response:**
-
-  * **Code:** 200 <br />
-    **Content:** 
-     ```javascript
-    {
-        "Username" : "example_user",
-        "Password" : "example_password",
-        "Name" : "example_name",
-        "Surname" : "example_surname",
-        "Email" : "example_email"
-    }
-    ```
- 
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "User doesn't exist" }`
-
-  OR
-
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ error : "You are unauthorized to make this request." }`
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

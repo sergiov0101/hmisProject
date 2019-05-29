@@ -1,0 +1,24 @@
+<mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>
+        {{bike == undefined ? '' : bike.Model}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{bike == undefined ? 0 : bike.Lat}}, 
+        {{bike == undefined ? 0 : bike.Lon}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://upload.wikimedia.org/wikipedia/commons/8/82/Melbourne_City_Bikes.JPG" alt="Bike example">
+    <mat-card-content>
+      <p>
+        Esta bicicleta se encuentra con toda la normativa cumplida y todas las revisiones al día.
+        <br/>
+        Disfrute sin límites!
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button *ngIf="IsAdminView()" (click)="bookBike(bike.Id)">Reservar {{shouldShowBookButton}}</button>
+      <button mat-button *ngIf="IsAdminView()" (click)="deleteBike(bike.Id)">DELETE BIKE</button>
+    </mat-card-actions>
+  </mat-card>

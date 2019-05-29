@@ -1,0 +1,8 @@
+.example-card {
+    max-width: 400px;
+}
+
+.example-header-image {
+background-image: url('https://media.istockphoto.com/vectors/bike-logo-icon-design-vector-id990353972');
+background-size: cover;
+}
