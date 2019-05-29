@@ -6,7 +6,6 @@ node{
     stage('Eliminar contenedores antiguos'){
         try{
             //Se detienen los contenedores que esten en ejecucion
-            sh 'cd BACKEND'
             sh 'ls'
             sh 'docker stop $(docker ps -a -q)'
             echo 'Detenidos contenedores'
@@ -26,7 +25,10 @@ node{
     }
     stage('Contruccion del proyecto '){
         //Se contruye el proyecto docker
-        sh 'docker-compose build'
+        dir('BACKEND') {
+            sh 'docker-compose build'
+        }
+        
     }
         stage('Levantar contenedores'){
         //Se levantan los contenedores
