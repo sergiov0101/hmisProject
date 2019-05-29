@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, NavigationExtras, ActivatedRoute} from '@angular/router';
-import {LoginService } from './login.service';
-import { SignIn } from '../registration/registration.service';
+import {LoginService, Login } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +17,10 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-  public user : SignIn;
+  public user : Login = {
+    Username : "",
+    Password : ""
+  };
   public userType ;
 
   ngOnInit() { }
