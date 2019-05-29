@@ -19,11 +19,11 @@ func LoadRoutes() {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/login", loginUserController).Methods("POST")
-	router.HandleFunc("/user", signInController).Methods("PUT")
+	router.HandleFunc("/user/add", signInController).Methods("POST")
 	router.HandleFunc("/user", updateUserController).Methods("POST")
 	router.HandleFunc("/user/{id}", getUserController).Methods("GET")
 	router.HandleFunc("/user", getUsersController).Methods("GET")
-	router.HandleFunc("/user", deleteUserController).Methods("DELETE")
+	router.HandleFunc("/user/delete", deleteUserController).Methods("POST")
 
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
