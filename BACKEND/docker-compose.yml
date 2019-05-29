@@ -1,15 +1,11 @@
 version: '3'
 services:
   db:
-    image: mysql:5.7
+    build:
+      context: .
+      dockerfile: Dockerfiledb
     ports:
     - "5003:3306"
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
-    environment:
-      MYSQL_ROOT_PASSWORD: dev-root
-      MYSQL_USER: dev-user
-      MYSQL_PASSWORD: dev-password
-      MYSQL_DATABASE: ProyectoFinalDra
     restart: on-failure
 
   phpmyadmin:
@@ -17,11 +13,3 @@ services:
     ports:
     - "5001:80"
     restart: on-failure
-
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile    
-    ports:
-    - "5002:5002"
-    
