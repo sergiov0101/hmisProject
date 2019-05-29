@@ -1,0 +1,32 @@
+  <mat-toolbar>
+      <span>INSERT NEW BIKE</span>
+    </mat-toolbar>
+    <mat-card class="my-card">
+      <mat-card-content>
+        <form class="my-form">
+           <mat-form-field class="full-width">
+                  <mat-label>Model</mat-label>
+                  <input  matInput  placeholder="Model"  name="fname" [(ngModel)]="bike.Model"  required>
+               </mat-form-field>
+               <mat-form-field class="full-width">
+                  <mat-label>Lat</mat-label>
+                  <input  matInput type="number"  placeholder="Lat" name="Lat" [(ngModel)]="bike.Lat" required>
+               </mat-form-field>
+               <mat-form-field class="full-width">
+                  <mat-label>Lon</mat-label>
+                  <input  matInput type="number" placeholder="Lon" name="Lon" [(ngModel)]="bike.Lon" required>
+               </mat-form-field>
+               <mat-form-field class="full-width">
+                <mat-label>Address</mat-label>
+                <input  matInput  placeholder="Address" name="address" [(ngModel)]="bike.Address" required>
+              </mat-form-field>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <!-- REGISTER BUTTON -->
+        <button mat-raised-button (click)="addBike()" color="primary" *ngIf="!shouldShowEditButton">ADD BIKE!</button>
+        <button mat-raised-button (click)="editBike()" color="primary" *ngIf="shouldShowEditButton">EDIT BIKE!</button>
+      </mat-card-actions>
+    </mat-card>
+
+  
