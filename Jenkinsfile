@@ -2,7 +2,7 @@ node{
     stage('checkout del repositorio git'){
             //Checkout del repositorio configurado 
             checkout scm
-             sh 'cd BACKEND'
+             sh 'cd ../BACKEND'
     }
     stage('Eliminar contenedores antiguos'){
         try{
