@@ -6,4 +6,6 @@ services:
       dockerfile: Dockerfile    
     ports:
     - "4200:4200"
+    command:
+      bash -c "npm install && ng serve"
     
