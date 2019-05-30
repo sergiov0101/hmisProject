@@ -5,6 +5,7 @@
     import { animate, state, style, transition, trigger } from '@angular/animations';
     import {Router, NavigationExtras, ActivatedRoute} from "@angular/router";
     import {DetailTableService, User} from './detail-table.service';
+    import {AppComponent} from '../app.component';
 
     @Component({
       selector: 'app-detail-table',
@@ -24,20 +25,24 @@ export class DetailTableComponent implements OnInit {
   public userType;
   public navigationExtras: NavigationExtras;
   dataSource = new UserDataSource(this.service);
+  public userName = "";
 
   displayedColumns = ['ID', 'Name', 'Surname', 'Email', 'Actions'];
   constructor(private service: DetailTableService, 
               private router: Router, 
-              private route : ActivatedRoute) {
+              private route : ActivatedRoute,
+              private app : AppComponent) {
     this.route.queryParams.subscribe(params => {
       this.navigationExtras = params;
       this.userType = params["UserType"];
+      this.userName = params["UserName"];
       
     });
   }
   
   ngOnInit() {
-    
+    this.app.SetShowNavLogin(false);
+    this.app.showUsername(this.userName);
   }
 
   bikeDetail(id : number) : void {

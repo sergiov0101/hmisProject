@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, NavigationExtras, ActivatedRoute} from '@angular/router';
 import {LoginService, Login } from './login.service';
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +10,14 @@ import {LoginService, Login } from './login.service';
 })
 export class LoginComponent implements OnInit {
   private navigationExtras : NavigationExtras;
-  constructor(private router: Router, private loginService : LoginService, private route: ActivatedRoute) { 
-    this.route.queryParams.subscribe(params => {
+  constructor(private router: Router, private loginService : LoginService, private route: ActivatedRoute, private app : AppComponent) { 
+   /* this.route.queryParams.subscribe(params => {
       if (params["User"] !== undefined){
         this.navigationExtras = params;
         this.user = params["User"];
       }
-    });
+    });*/
+    
   }
   public user : Login = {
     Username : "",
@@ -23,9 +25,15 @@ export class LoginComponent implements OnInit {
   };
   public userType ;
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.app.SetShowNavLogin(true);
+   }
 
+  public showDiv = false;
+  public vBarraInicio = false;
   login() : void {
+    
+    this.showDiv=false;
     let navigationExtras: NavigationExtras = {
       queryParams: {
           "UserType": this.userType
@@ -34,8 +42,12 @@ export class LoginComponent implements OnInit {
 
     if (this.user.Username=='admin' && this.user.Password=='adminAvenger11') {
       navigationExtras.queryParams["UserType"] = "admin";
+      navigationExtras.queryParams["UserName"] = "Administrator";
       this.router.navigate(["adminView"], navigationExtras);
+      this.app.SetShowNavLogin(false);
+      this.app.showUsername(this.user.Username);
     } else {
+      console.log("",this.user)
       navigationExtras.queryParams["UserType"] = "user";
       this.loginService.login({
         Username : this.user.Username,
@@ -46,10 +58,15 @@ export class LoginComponent implements OnInit {
           navigationExtras.queryParams["Name"] = data["Name"];
           navigationExtras.queryParams["Surname"] = data["Surname"];
           navigationExtras.queryParams["Email"] = data["Email"];
+          
+        navigationExtras.queryParams["UserName"] = this.user.Username;
+          this.app.SetShowNavLogin(false);
+          this.app.showUsername(this.user.Username);
           this.router.navigate(["bikedetail"], navigationExtras);
+
         },
         error => {
-          alert("INVALID CREDENTIALS");
+          this.showDiv=true;
         }
         );
 
