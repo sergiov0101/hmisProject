@@ -27,6 +27,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.app.SetShowNavLogin(true);
+    this.app.setShowNavDrop(false);
+    this.app.resetActivenavs();
+    this.app.activeNavLogin = true;
+    //activeNavElem:false;
    }
 
   public showDiv = false;

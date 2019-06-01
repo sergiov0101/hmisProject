@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, NavigationExtras} from '@angular/router';
 import {SignIn, RegistrationService} from './registration.service';
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-registration',
@@ -12,9 +13,11 @@ export class RegistrationComponent implements OnInit {
   public passError = false;
   public Password2 ="";
   public auxMsj ="";
-  constructor(private router : Router, private service : RegistrationService) { }
+  constructor(private router : Router, private service : RegistrationService,private app : AppComponent) { }
 
   ngOnInit() {
+    this.app.resetActivenavs();
+    this.app.activeNavRegister = true;
   }
 
   public user : SignIn = {

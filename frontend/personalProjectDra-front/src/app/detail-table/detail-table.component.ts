@@ -42,7 +42,8 @@ export class DetailTableComponent implements OnInit {
   
   ngOnInit() {
     this.app.SetShowNavLogin(false);
-    this.app.showUsername(this.userName);
+    this.app.showUsername(this.userName,"admin");
+    this.app.showNavDrop = true;
   }
 
   bikeDetail(id : number) : void {
