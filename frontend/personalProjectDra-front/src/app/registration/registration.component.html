@@ -33,6 +33,28 @@
           <!-- REGISTER BUTTON -->
          <button mat-raised-button  type="submit" color="primary">REGISTER</button>
     </form>
+  <!-- Button trigger modal -->
+ 
+ <!-- Modal -->
+ <div class="modal fade" id="RegisterOk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">Registro correcto</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         El registro se ha realizado correctamente.<br/>
+         pulse continuar para iniciar sesion
+       </div>
+       <div class="modal-footer">
+         <button onclick="window.location.href='/login'" type="button" class="btn btn-primary">continuar</button>
+       </div>
+     </div>
+   </div>
+ </div>
   </mat-card-content>
   <mat-card-actions>
    

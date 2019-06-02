@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router, NavigationExtras} from '@angular/router';
 import {SignIn, RegistrationService} from './registration.service';
 import {AppComponent} from '../app.component';
-
+declare var $:any;
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -40,6 +40,7 @@ export class RegistrationComponent implements OnInit {
       this.emailError = false;
       this.passError = false;
 
+      $('#RegisterOk').modal('show')
 
       if (!this.checkEmail(this.user.Email)){
         this.emailError = true;
@@ -56,7 +57,8 @@ export class RegistrationComponent implements OnInit {
         this.service.createUser(this.user).subscribe(data => {
           console.log("DATA L ", data);
         });
-        this.router.navigate(["login"], this.navigationExtras);
+        $('#RegisterOk').modal('show')
+       // this.router.navigate(["login"], this.navigationExtras);
       }
   }
   // comprobacion del email
