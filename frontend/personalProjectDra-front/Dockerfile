@@ -17,4 +17,4 @@ RUN npm install -g @angular/cli && npm install
 
 # Exponemos la aplicación en el puerto 5002 
 # (primer parametro el puerto a exponer fuera del contenedor y el segundo parametro el puerto en el que está expuesta en el contenedor)
-EXPOSE 8081:8081
+EXPOSE 8080:8080
