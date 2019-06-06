@@ -10,14 +10,14 @@ export class InsertBikeService {
     
     constructor(private http: HttpClient) { }
         
-    addBike(bike : User) : void {
-        this.http.post(this.serviceUrl + "/users/add", bike).subscribe(response => {
+    addBike(user : User) : void {
+        this.http.post(this.serviceUrl + "/users/add", user).subscribe(response => {
             console.log("RESPONSE : ", response);
         });
     }
     
-    editBike(bike : User) : void {
-        this.http.post(this.serviceUrl + "/users", bike).subscribe(response => {
+    editBike(user : User) : void {
+        this.http.post(this.serviceUrl + "/users", user).subscribe(response => {
             console.log("RESPONSE : ", response);
         });
     }

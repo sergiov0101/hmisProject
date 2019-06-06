@@ -24,7 +24,7 @@ func UpdateUser(user *models.User) error {
 		return errors.New("error executing query")
 	}
 
-	_, err = dbPrepare.Exec(&user.Name, &user.Email, &user.Surname, &user.Id)
+	_, err = dbPrepare.Exec(&user.Email, &user.Name, &user.Surname, &user.Id)
 	if err != nil {
 		err = errors.New("CANNOT PREPARE STATMENT")
 		return err

@@ -64,9 +64,9 @@ export class DetailTableComponent implements OnInit {
 
   deleteBike(id : number) : void {
     this.service.deleteBike(id);
-    setTimeout(() => {
+    /*setTimeout(() => {
       window.location.reload();
-    }, 500);
+    }, 500);*/
   }
 
   editBike(user : User) : void {

@@ -2,19 +2,20 @@
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>
-        {{bike == undefined ? '' : bike.Model}}
+        {{user == undefined? '' : user.Name + user.Surname}}
       </mat-card-title>
-      <mat-card-subtitle>
-        {{bike == undefined ? 0 : bike.Lat}}, 
-        {{bike == undefined ? 0 : bike.Lon}}
-      </mat-card-subtitle>
+      <button class="btn btn-warning " mat-button (click)="editUser(user)" ><mat-icon>edit</mat-icon></button> 
     </mat-card-header>
     <img mat-card-image src="http://stanford.edu/~mlchu/cgi-bin/cs247/spaatify/website/assets/img/spaatify/week8_testing.jpg" alt="Bike example">
     <mat-card-content>
       <p>
-        Esta bicicleta se encuentra con toda la normativa cumplida y todas las revisiones al día.
+        Id : {{user == undefined ? '' : user.Id}}
         <br/>
-        Disfrute sin límites!
+        Email : {{user == undefined ? '' :user.Email}}
+        <br/>
+        Tipo de usuario : {{user == undefined? '' : userType}}
+        <br/>
+        
       </p>
     </mat-card-content>
   </mat-card>
