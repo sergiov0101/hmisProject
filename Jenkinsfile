@@ -14,7 +14,7 @@ node{
         }
 
         try{
-            //Se eliminan los contenedores que existan 
+            //Se eliminan los contenedores que existan  a
             sh 'docker rm $(docker ps -a -q)'
             echo 'Eliminados contenedores'
         }
