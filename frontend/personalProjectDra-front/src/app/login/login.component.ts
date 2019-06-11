@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router, NavigationExtras, ActivatedRoute} from '@angular/router';
 import {LoginService, Login } from './login.service';
 import {AppComponent} from '../app.component';
-
+declare var $:any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -47,9 +47,17 @@ export class LoginComponent implements OnInit {
     if (this.user.Username=='admin' && this.user.Password=='adminAvenger11') {
       navigationExtras.queryParams["UserType"] = "admin";
       navigationExtras.queryParams["UserName"] = "Administrator";
-      this.router.navigate(["adminView"], navigationExtras);
       this.app.SetShowNavLogin(false);
       this.app.showUsername(this.user.Username);
+      $('#loginOk').modal('show');
+      setTimeout(() => {
+        this.router.navigate(["adminView"], navigationExtras);
+        $('#loginOk').modal('hide');
+      }, 1000)
+ 
+            
+      
+ 
     } else {
       console.log("",this.user)
       navigationExtras.queryParams["UserType"] = "user";
@@ -66,8 +74,14 @@ export class LoginComponent implements OnInit {
         navigationExtras.queryParams["UserName"] = this.user.Username;
           this.app.SetShowNavLogin(false);
           this.app.showUsername(this.user.Username);
-          this.router.navigate(["bikedetail"], navigationExtras);
+          $('#loginOk').modal('show');
+          setTimeout(() => {
+            this.router.navigate(["bikedetail"], navigationExtras);
+            $('#loginOk').modal('hide');
+          }, 1000)
+          
 
+         
         },
         error => {
           this.showDiv=true;

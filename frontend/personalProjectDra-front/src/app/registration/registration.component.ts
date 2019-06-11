@@ -40,8 +40,6 @@ export class RegistrationComponent implements OnInit {
       this.emailError = false;
       this.passError = false;
 
-      $('#RegisterOk').modal('show')
-
       if (!this.checkEmail(this.user.Email)){
         this.emailError = true;
         campoError = true;
@@ -53,7 +51,7 @@ export class RegistrationComponent implements OnInit {
       }
 
 
-      if (!campoError){
+      if (campoError==false){
         this.service.createUser(this.user).subscribe(data => {
           console.log("DATA L ", data);
         });

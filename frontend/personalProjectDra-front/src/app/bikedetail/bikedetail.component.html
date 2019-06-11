@@ -1,7 +1,7 @@
 <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>
+      <mat-card-title id="nameHeaderDetail">
         {{user == undefined? '' : user.Name + user.Surname}}
       </mat-card-title>
       <button class="btn btn-warning " mat-button (click)="editUser(user)" ><mat-icon>edit</mat-icon></button> 
