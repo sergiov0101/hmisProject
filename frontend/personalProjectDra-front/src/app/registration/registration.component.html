@@ -6,29 +6,29 @@
     <form class="my-form" novalidate (ngSubmit)="register()" >
          <mat-form-field class="full-width">
             <mat-label>UserName</mat-label>
-            <input  matInput  placeholder="name" name="name"  required [(ngModel)]="user.Username">
+            <input id="registerUserName"  matInput  placeholder="name" name="name"  required [(ngModel)]="user.Username">
          </mat-form-field>
        <mat-form-field class="full-width">
               <mat-label>Nombre</mat-label>
-              <input  matInput  placeholder="First name"  name="fname"  required [(ngModel)]="user.Name">
+              <input Id="registerName" matInput  placeholder="First name"  name="fname"  required [(ngModel)]="user.Name">
            </mat-form-field>
            <mat-form-field class="full-width">
               <mat-label>Surname</mat-label>
-              <input  matInput  placeholder="Last Name" name="lname"  required [(ngModel)]="user.Surname">
+              <input id="registerSurname"  matInput  placeholder="Last Name" name="lname"  required [(ngModel)]="user.Surname">
            </mat-form-field>
            <mat-form-field class="full-width">
               <mat-label>Email</mat-label>
-              <input  matInput  placeholder="Address" name="address"  required [(ngModel)]="user.Email">
+              <input id="registerEmail"  matInput  placeholder="Address" name="address"  required [(ngModel)]="user.Email">
            </mat-form-field>
            <div id="emailError" *ngIf="emailError" class="alert alert-danger" role="alert">El email no es correcto</div>
            <mat-form-field class="full-width">
               <mat-label>Password</mat-label>
-              <input type="password"  matInput  placeholder="Password" name="Password" required [(ngModel)]="user.Password">
+              <input id="registerPass1" type="password"  matInput  placeholder="Password" name="Password" required [(ngModel)]="user.Password">
            </mat-form-field>
            <div id="passError" *ngIf="passError" class="alert alert-danger" role="alert" [innerHTML]="auxMsj"></div>
            <mat-form-field class="full-width">
             <mat-label>Repeat password</mat-label>
-            <input type="password"  matInput  placeholder="Username" name="Username" required [(ngModel)]="Password2">
+            <input id="registerPass2" type="password"  matInput  placeholder="Username" name="Username" required [(ngModel)]="Password2">
          </mat-form-field>
           <!-- REGISTER BUTTON -->
          <button mat-raised-button  type="submit" color="primary">REGISTER</button>
